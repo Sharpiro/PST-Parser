@@ -116,6 +116,11 @@ namespace PSTParse.NodeDatabaseLayer
 
         public Tuple<ulong, ulong> GetNIDBID(ulong NID)
         {
+            if (Entries.Count == 0)
+            {
+                throw new Exception($"Empty entries while getting NID 0x{NID:x2}");
+            }
+
             var isBTEntry = Entries[0] is BTENTRY;
             for (int i = 0; i < Entries.Count; i++)
             {
